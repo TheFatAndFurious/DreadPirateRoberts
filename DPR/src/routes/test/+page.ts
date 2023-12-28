@@ -1,14 +1,17 @@
 import type { PageLoad } from './$types';
 import { supabase } from '$lib/supabase';
 
-const { data } = await supabase.from('test').select('*');
-console.log('🚀 ~ file: +page.ts:5 ~ data:', data);
-const { error } = await supabase.auth.signUp({
-	email: 'test@yopmail.com',
-	password: 'password'
-});
+// const { error } = await supabase.auth.signUp({
+// 	email: 'mrguerrilla@gmail.com',
+// 	password: 'password'
+// });
+// const { data, error } = await supabase.auth.signInWithPassword({
+// 	email: 'mrguerrilla@gmail.com',
+// 	password: 'password'
+// });
+// supabase.functions.setAuth(data.session?.access_token);
+const { data, error } = await supabase.from('calendar').select();
+console.log('🚀 ~ file: +page.ts:14 ~ data:', data);
 export const load = (async () => {
-	return {
-		data
-	};
+	return {};
 }) satisfies PageLoad;
