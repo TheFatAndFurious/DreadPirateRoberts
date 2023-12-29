@@ -3,8 +3,8 @@
 
 	export let data: LayoutData;
 	import '../app.css';
+	import Navbar from '../components/navbar.svelte';
 </script>
 
-<h1>coucou</h1>
-
+<Navbar />
 <slot />

@@ -10,8 +10,12 @@ import { supabase } from '$lib/supabase';
 // 	password: 'password'
 // });
 // supabase.functions.setAuth(data.session?.access_token);
-const { data, error } = await supabase.from('calendar').select();
-console.log('🚀 ~ file: +page.ts:14 ~ data:', data);
+console.log(data.session);
+// const { data, error } = await supabase
+// 	.from('calendar')
+// 	.select()
+// 	.eq('user_calendars.id_user', data.session?.id_user);
+// console.log('🚀 ~ file: +page.ts:14 ~ data:', data);
 export const load = (async () => {
 	return {};
 }) satisfies PageLoad;
