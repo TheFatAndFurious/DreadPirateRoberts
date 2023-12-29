@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-
+	import { userProfile } from '../../stores';
 	export let data: PageData;
 	console.log(data);
+	$: console.log($userProfile);
 </script>
 
 <select class="select w-full max-w-xs">
@@ -13,6 +14,8 @@
 	<option>Lisa</option>
 	<option>Maggie</option>
 </select>
+
+<p>user profile is {$userProfile}</p>
 
 {#each data.data as calendar}
 	<div class="card w-96 bg-base-100 shadow-xl">

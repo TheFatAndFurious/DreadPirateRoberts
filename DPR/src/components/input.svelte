@@ -1,0 +1,10 @@
+<script lang="ts">
+	export let value: any | undefined;
+</script>
+
+<input
+	type="text"
+	placeholder="Type here"
+	class="input input-bordered input-accent w-full max-w-xs"
+	bind:value
+/>
