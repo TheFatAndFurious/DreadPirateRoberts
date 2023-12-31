@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { userProfile } from '../../stores';
+	import { userProfile } from '../../stores/userStore';
 	export let data: PageData;
 	console.log(data);
 	$: console.log($userProfile);
@@ -15,9 +15,10 @@
 	<option>Maggie</option>
 </select>
 
-<p>user profile is {$userProfile}</p>
+<p>user profile is</p>
+<pre>{JSON.stringify($userProfile, null, 2)}</pre>
 
-{#each data.data as calendar}
+<!-- {#each data.data as calendar}
 	<div class="card w-96 bg-base-100 shadow-xl">
 		<div class="card-body">
 			<h2 class="card-title capitalize">{calendar.name}</h2>
@@ -27,4 +28,4 @@
 			</div>
 		</div>
 	</div>
-{/each}
+{/each} -->
