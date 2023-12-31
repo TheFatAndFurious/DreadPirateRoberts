@@ -2,7 +2,7 @@
 	import type { PageData } from './$types';
 	import { userProfile } from '../../stores/userStore';
 	export let data: PageData;
-	console.log(data);
+	console.log('test is layout is passing down:', data.data);
 	$: console.log($userProfile);
 </script>
 
