@@ -1,22 +1,35 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { userProfile } from '../../stores/userStore';
+	import HorNavbar from '../../components/horNavbar.svelte';
 	export let data: PageData;
-	console.log('test is layout is passing down:', data.data);
-	$: console.log($userProfile);
+	let myCalendars: boolean = true;
+	function handleCalendarChange(newVal) {
+		myCalendars = newVal;
+	}
+	console.log(data.userCalendars);
+	console.log(data.calendars);
+
+	const userSubscribedCalendars = data.userCalendars?.map((calendar) => {
+		return data.calendars?.find((item) => item.id === calendar.user_calendar);
+	});
+	console.log(
+		'🚀 ~ file: +page.svelte:16 ~ userSubscribedCalendars ~ userSubscribedCalendars:',
+		userSubscribedCalendars
+	);
 </script>
 
-<select class="select w-full max-w-xs">
-	<option disabled selected>Choisir une categorie</option>
-	<option>Homer</option>
-	<option>Marge</option>
-	<option>Bart</option>
-	<option>Lisa</option>
-	<option>Maggie</option>
-</select>
+<HorNavbar myCalendars on:change={handleCalendarChange} />
 
-<p>user profile is</p>
-<pre>{JSON.stringify($userProfile, null, 2)}</pre>
+{#if myCalendars.detail === true}
+	{#each userSubscribedCalendars as calendar}
+		<p>{calendar.name}</p>
+	{/each}
+{:else}
+	{#each data.calendars as aCelendar}
+		<p>{aCelendar.name}</p>
+	{/each}
+{/if}
 
 <!-- {#each data.data as calendar}
 	<div class="card w-96 bg-base-100 shadow-xl">

@@ -1,9 +1,7 @@
-import { supabase } from '$lib/supabase';
+import { controlIsLoggedIn } from '$lib/user';
 import type { LayoutLoad } from './$types';
 
-const data = await supabase.auth.getSession();
-console.log('🚀 ~ file: +layout.ts:5 ~ data:', data);
-
 export const load = (async () => {
-	return { data };
+	const session = await controlIsLoggedIn();
+	return { session };
 }) satisfies LayoutLoad;

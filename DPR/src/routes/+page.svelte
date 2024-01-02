@@ -1,5 +1,7 @@
 <script>
+	export let data;
 	console.log('test page accueil');
+	console.log('data is ', data);
 </script>
 
 <h1>Welcome to SvelteKit</h1>
