@@ -1,14 +1,18 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	export let myCalendars: boolean;
+	export let item: 'Mes calendriers';
 	const dispatch = createEventDispatcher();
+	const navbarItems = ['Mes calendriers', 'Tous les calendriers'];
 </script>
 
-<ul class="menu menu-horizontal bg-base-200">
-	<button on:click={() => dispatch('change', myCalendars === true)}>
-		<li>Mes calendriers</li>
-	</button>
-	<button on:click={() => dispatch('change', myCalendars === false)}>
-		<li>Tous les calendriers</li>
-	</button>
-</ul>
+<div class="w-full">
+	<ul class="menu menu-horizontal bg-base-200 w-full flex justify-evenly">
+		{#each navbarItems as item}
+			<li>
+				<button on:click={() => dispatch('change', item)}>
+					{item}
+				</button>
+			</li>
+		{/each}
+	</ul>
+</div>

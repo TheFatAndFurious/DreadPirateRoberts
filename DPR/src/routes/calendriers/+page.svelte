@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { userProfile } from '../../stores/userStore';
 	import HorNavbar from '../../components/horNavbar.svelte';
+	import Card from '../../components/card.svelte';
 	export let data: PageData;
-	let myCalendars: boolean = true;
+	let item: string = 'Mes calendriers';
 	function handleCalendarChange(newVal) {
-		myCalendars = newVal;
+		item = newVal;
 	}
 	console.log(data.userCalendars);
 	console.log(data.calendars);
@@ -13,21 +13,19 @@
 	const userSubscribedCalendars = data.userCalendars?.map((calendar) => {
 		return data.calendars?.find((item) => item.id === calendar.user_calendar);
 	});
-	console.log(
-		'🚀 ~ file: +page.svelte:16 ~ userSubscribedCalendars ~ userSubscribedCalendars:',
-		userSubscribedCalendars
-	);
+
+	$: console.log(item.detail);
 </script>
 
 <HorNavbar myCalendars on:change={handleCalendarChange} />
 
-{#if myCalendars.detail === true}
+{#if item.detail === 'Mes calendriers'}
 	{#each userSubscribedCalendars as calendar}
-		<p>{calendar.name}</p>
+		<Card title={calendar.name} descriptif={calendar.descriptif} />
 	{/each}
 {:else}
 	{#each data.calendars as aCelendar}
-		<p>{aCelendar.name}</p>
+		<Card title={aCelendar.name} descriptif={aCelendar.descriptif} />
 	{/each}
 {/if}
 
