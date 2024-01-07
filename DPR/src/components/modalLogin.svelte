@@ -19,7 +19,6 @@
 		const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 		supabase.functions.setAuth(data.session?.access_token);
 		userProfile.set(data);
-		console.log('33333333', $userProfile);
 		closeModal();
 		goto('/calendriers');
 	};

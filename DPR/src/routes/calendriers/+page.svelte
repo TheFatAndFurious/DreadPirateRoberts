@@ -7,8 +7,6 @@
 	function handleCalendarChange(newVal) {
 		item = newVal;
 	}
-	console.log(data.userCalendars);
-	console.log(data.calendars);
 
 	const userSubscribedCalendars = data.userCalendars?.map((calendar) => {
 		return data.calendars?.find((item) => item.id === calendar.user_calendar);
@@ -28,15 +26,3 @@
 		<Card title={aCelendar.name} descriptif={aCelendar.descriptif} />
 	{/each}
 {/if}
-
-<!-- {#each data.data as calendar}
-	<div class="card w-96 bg-base-100 shadow-xl">
-		<div class="card-body">
-			<h2 class="card-title capitalize">{calendar.name}</h2>
-			<p>If a dog chews shoes whose shoes does he choose?</p>
-			<div class="card-actions justify-end">
-				<button class="btn btn-primary">Voir les evenements</button>
-			</div>
-		</div>
-	</div>
-{/each} -->
