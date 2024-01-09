@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { supabase } from '$lib/supabase';
+	import SingleEventCard from './singleEventCard.svelte';
 	export let idCalendar: number;
 	let isLoading = false;
 	let modal;
-	let events: [] = [];
+	let events = [];
 
 	async function getEventsForACalendar(id: number) {
 		const { data, error } = await supabase.from('events').select('*').eq('id_calendar', id);
@@ -11,28 +12,34 @@
 			console.error('Error fetching events:', error);
 			return [];
 		}
+		console.log('🚀 ~ getEventsForACalendar ~ data:', data);
 		return data;
 	}
 
-	export function openModal() {
+	$: if (idCalendar) {
 		isLoading = true;
 		getEventsForACalendar(idCalendar)
 			.then((fetchedEvents) => {
 				events = fetchedEvents;
-				modal?.showModal();
 			})
 			.finally(() => {
 				isLoading = false;
 			});
 	}
+
+	export function openModal() {
+		modal?.showModal();
+	}
 </script>
 
 <dialog id="my_modal_3" class="modal" bind:this={modal}>
-	<div class="modal-box">
+	<div class="modal-box w-3/4">
 		<h3 class="font-bold text-lg">Evenements</h3>
-		{#if events.length > 0}
+		{#if isLoading === true}
+			<p>Loading...</p>
+		{:else if events.length > 0}
 			{#each events as event}
-				<p>{event.title}</p>
+				<SingleEventCard date={event.date} title={event.title} time={event.time} />
 				<!-- Display the title of each event -->
 			{/each}
 		{:else}

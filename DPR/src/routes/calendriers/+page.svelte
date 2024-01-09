@@ -11,8 +11,9 @@
 	let allCalendars: Calendar[] = data.calendars || [];
 	let modalEvents;
 
-	function openEventsModal(calendarId) {
+	function openEventsModal(calendarId: number) {
 		selected = calendarId;
+
 		modalEvents.openModal();
 	}
 
@@ -28,7 +29,6 @@
 				return data.calendars?.find((calendar) => calendar.id === userCalendar.user_calendar);
 			})
 			.filter((calendar): calendar is Calendar => calendar !== undefined) || [];
-	console.log('item is in page', selected);
 </script>
 
 <HorNavbar on:change={handleCalendarChange} {item} />
@@ -41,7 +41,9 @@
 	{/each}
 {:else}
 	{#each allCalendars as aCelendar}
-		<Card title={aCelendar.name} descriptif={aCelendar.descriptif} idCalendar={aCelendar.id} />
+		<button on:click={() => openEventsModal(aCelendar.id)}>
+			<Card title={aCelendar.name} descriptif={aCelendar.descriptif} idCalendar={aCelendar.id} />
+		</button>
 	{/each}
 {/if}
 <ModalEvents idCalendar={selected} bind:this={modalEvents} />
