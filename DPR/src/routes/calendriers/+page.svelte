@@ -2,27 +2,46 @@
 	import type { PageData } from './$types';
 	import HorNavbar from '../../components/horNavbar.svelte';
 	import Card from '../../components/card.svelte';
+	import type { Calendar, UserCalendar } from './types';
+	import ModalEvents from '../../components/modalEvents.svelte';
 	export let data: PageData;
-	let item: string = 'Mes calendriers';
-	function handleCalendarChange(newVal) {
-		item = newVal;
+	let item: string = 'Tous les calendriers';
+	data.session ? item === 'Mes calendriers' : item === 'Tous les calendriers';
+	let selected: number = 0;
+	let allCalendars: Calendar[] = data.calendars || [];
+	let modalEvents;
+
+	function openEventsModal(calendarId) {
+		selected = calendarId;
+		modalEvents.openModal();
 	}
 
-	const userSubscribedCalendars = data.userCalendars?.map((calendar) => {
-		return data.calendars?.find((item) => item.id === calendar.user_calendar);
-	});
+	// Handling item value to cycle through the navbar
+	function handleCalendarChange(newVal: CustomEvent<string>) {
+		item = newVal.detail;
+	}
 
-	$: console.log(item.detail);
+	// A REFACTO
+	let userSubscribedCalendars: Calendar[] =
+		data.userCalendars
+			?.map((userCalendar: UserCalendar) => {
+				return data.calendars?.find((calendar) => calendar.id === userCalendar.user_calendar);
+			})
+			.filter((calendar): calendar is Calendar => calendar !== undefined) || [];
+	console.log('item is in page', selected);
 </script>
 
-<HorNavbar myCalendars on:change={handleCalendarChange} />
+<HorNavbar on:change={handleCalendarChange} {item} />
 
-{#if item.detail === 'Mes calendriers'}
+{#if item === 'Mes calendriers'}
 	{#each userSubscribedCalendars as calendar}
-		<Card title={calendar.name} descriptif={calendar.descriptif} />
+		<button on:click={() => openEventsModal(calendar.id)}>
+			<Card title={calendar.name} descriptif={calendar.descriptif} idCalendar={calendar.id} />
+		</button>
 	{/each}
 {:else}
-	{#each data.calendars as aCelendar}
-		<Card title={aCelendar.name} descriptif={aCelendar.descriptif} />
+	{#each allCalendars as aCelendar}
+		<Card title={aCelendar.name} descriptif={aCelendar.descriptif} idCalendar={aCelendar.id} />
 	{/each}
 {/if}
+<ModalEvents idCalendar={selected} bind:this={modalEvents} />

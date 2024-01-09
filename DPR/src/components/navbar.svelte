@@ -1,6 +1,6 @@
 <div class="btm-nav">
 	<a href="/">
-		<button>
+		<button class="flex flex-col justify-center">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				class="h-5 w-5"

@@ -1,23 +1,23 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import clsx from 'clsx';
-	export let item: 'Mes calendriers';
+	export let item;
 	const dispatch = createEventDispatcher();
-	let selected = 'Mes calendriers';
+	let selected = item;
 	const navbarItems = ['Mes calendriers', 'Tous les calendriers'];
 
-	const handleClick = (event) => {
-		dispatch('change', event.target.textContent);
-		selected = event.target.textContent;
+	const handleClick = (event: MouseEvent) => {
+		const target = event.target as HTMLButtonElement;
+		dispatch('change', target?.textContent);
+		selected = target?.textContent;
 	};
 </script>
 
 <div class="w-full">
 	<ul class="menu menu-horizontal bg-base-200 w-full flex justify-evenly">
-		{#each navbarItems as item}
+		{#each navbarItems as singleItem}
 			<li>
-				<button on:click={(item) => handleClick(item)}>
-					<p class={selected === item ? 'font-extrabold' : null}>{item}</p>
+				<button on:click={(singleItem) => handleClick(singleItem)}>
+					<p class={selected === singleItem ? 'font-extrabold' : null}>{singleItem}</p>
 				</button>
 			</li>
 		{/each}
