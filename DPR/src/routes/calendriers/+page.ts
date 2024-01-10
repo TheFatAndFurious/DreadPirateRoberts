@@ -10,7 +10,6 @@ const [calendars, userCalendars] = await Promise.all([
 		.select('*')
 		.eq('id_user', profile.data.session?.user.id)
 ]);
-console.log(calendars);
 export const load = (async () => {
 	return {
 		userCalendars: userCalendars.data,

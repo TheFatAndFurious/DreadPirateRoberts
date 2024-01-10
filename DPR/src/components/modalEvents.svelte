@@ -12,7 +12,6 @@
 			console.error('Error fetching events:', error);
 			return [];
 		}
-		console.log('🚀 ~ getEventsForACalendar ~ data:', data);
 		return data;
 	}
 
@@ -36,14 +35,19 @@
 	<div class="modal-box w-3/4">
 		<h3 class="font-bold text-lg">Evenements</h3>
 		{#if isLoading === true}
-			<p>Loading...</p>
+			<span class="loading loading-spinner text-accent"></span>
 		{:else if events.length > 0}
 			{#each events as event}
-				<SingleEventCard date={event.date} title={event.title} time={event.time} />
+				<SingleEventCard
+					date={event.date}
+					title={event.title}
+					time={event.time}
+					eventID={event.id}
+				/>
 				<!-- Display the title of each event -->
 			{/each}
 		{:else}
-			<p>No events</p>
+			<div>No events</div>
 		{/if}
 	</div>
 	<form method="dialog" class="modal-backdrop">

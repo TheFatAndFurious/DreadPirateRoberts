@@ -11,12 +11,6 @@
 	let allCalendars: Calendar[] = data.calendars || [];
 	let modalEvents;
 
-	function openEventsModal(calendarId: number) {
-		selected = calendarId;
-
-		modalEvents.openModal();
-	}
-
 	// Handling item value to cycle through the navbar
 	function handleCalendarChange(newVal: CustomEvent<string>) {
 		item = newVal.detail;
@@ -29,21 +23,25 @@
 				return data.calendars?.find((calendar) => calendar.id === userCalendar.user_calendar);
 			})
 			.filter((calendar): calendar is Calendar => calendar !== undefined) || [];
+
+	let unSuscribedCalendars: Calendar[] = allCalendars.filter(
+		(calendar) => !userSubscribedCalendars.includes(calendar)
+	);
 </script>
 
 <HorNavbar on:change={handleCalendarChange} {item} />
 
 {#if item === 'Mes calendriers'}
 	{#each userSubscribedCalendars as calendar}
-		<button on:click={() => openEventsModal(calendar.id)}>
+		<a href={`/calendriers/${calendar.id}`}>
 			<Card title={calendar.name} descriptif={calendar.descriptif} idCalendar={calendar.id} />
-		</button>
+		</a>
 	{/each}
 {:else}
-	{#each allCalendars as aCelendar}
-		<button on:click={() => openEventsModal(aCelendar.id)}>
+	{#each unSuscribedCalendars as aCelendar}
+		<a href={`/calendriers/${aCelendar.id}`}>
 			<Card title={aCelendar.name} descriptif={aCelendar.descriptif} idCalendar={aCelendar.id} />
-		</button>
+		</a>
 	{/each}
 {/if}
 <ModalEvents idCalendar={selected} bind:this={modalEvents} />

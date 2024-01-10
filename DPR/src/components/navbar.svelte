@@ -1,4 +1,4 @@
-<div class="btm-nav">
+<div class="btm-nav z-50">
 	<a href="/">
 		<button class="flex flex-col justify-center">
 			<svg
