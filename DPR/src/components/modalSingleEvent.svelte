@@ -1,19 +1,14 @@
 <script lang="ts">
 	import { supabase } from '$lib/supabase';
-	import type { PageData } from '../routes/$types';
-	import Button from './button.svelte';
-	export let data: PageData;
 	export let title: String;
 	export let description: String;
 	export let date: string;
 	export let time: String;
 	export let eventID: String;
 	export let idUser: String;
-	console.log('🚀 ~ idUser:', idUser);
 
 	async function handleClick() {
 		try {
-			console.log('coucou');
 			const response = await supabase
 				.from('user_events')
 				.insert({ id_user: idUser, id_event: eventID });
@@ -49,9 +44,9 @@
 		</div>
 		<div class="mx-auto flex justify-center p-2">
 			<button on:click={handleClick}>Enregistrer l'evenement</button>
-			<form method="dialog" class="modal-backdrop">
-				<button>close</button>
-			</form>
 		</div>
 	</div>
+	<form method="dialog" class="modal-backdrop">
+		<button>close</button>
+	</form>
 </dialog>

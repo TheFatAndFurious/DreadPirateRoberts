@@ -33,6 +33,7 @@
 				title={oneEvent.title}
 				date={oneEvent.date}
 				time={oneEvent.time}
+				idUser={data.session.user.id}
 			/>
 		{/each}
 		<button

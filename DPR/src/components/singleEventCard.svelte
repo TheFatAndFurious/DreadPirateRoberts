@@ -8,6 +8,7 @@
 	export let eventID: string;
 	export let calendarName: string;
 	export let calendarID: string;
+	export let idUser: string;
 	console.log($page.route.id);
 </script>
 
@@ -23,6 +24,6 @@
 		{#if time}
 			<p>Heure: {time}</p>
 		{/if}
-		<ModalSingleEvent {eventID} {title} {date} {time} description={'random blah blah'} />
+		<ModalSingleEvent {eventID} {title} {date} {time} description={'random blah blah'} {idUser} />
 	</div>
 </div>
