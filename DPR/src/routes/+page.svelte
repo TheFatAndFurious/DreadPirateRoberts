@@ -1,7 +1,27 @@
-<script>
-	export let data;
-</script>
+<script lang="ts">
+	import type { PageData } from './$types';
+	import { userProfile } from '../stores/userStore';
+	import  SingleEventCard  from '../components/singleEventCard.svelte'
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-<a href="/calendriers">Calendriers</a>
+	if(localStorage.getItem("sb-kjbbaqzbjbcivxoomkfg-auth-token") != null) {
+		const temp = localStorage.getItem("sb-kjbbaqzbjbcivxoomkfg-auth-token")
+		userProfile.update(temp);
+	} else {
+		console.log('coucou')
+	}
+	$: console.log("userProfile is: ", userProfile)
+	export let data: PageData;
+	console.log("=>(+page.svelte:5) data", data);
+	const user_events = data.events?.data
+</script>
+{#if data.session}
+		<h1>Hello {data.session.user.email}</h1>
+{/if}
+{#if user_events.length > 0}
+{#each user_events as event}
+<SingleEventCard title={event.title} date={event.date} eventID={event.id} idUser={data.session?.user.id} calendarID={event.id_calendar} time={event.time} />
+{/each }
+	{:else }
+	<p>Aucun evenement a venir</p>
+	{/if}
+

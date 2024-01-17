@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { supabase } from '$lib/supabase';
+	import Button from './button.svelte';
 	export let title: String;
 	export let description: String;
 	export let date: string;
@@ -17,6 +18,8 @@
 		}
 	}
 </script>
+
+
 
 <button class="btn" on:click={() => document.getElementById(`modal_${eventID}`).showModal()}
 	>Voir evenement</button
@@ -43,7 +46,7 @@
 			</div>
 		</div>
 		<div class="mx-auto flex justify-center p-2">
-			<button on:click={handleClick}>Enregistrer l'evenement</button>
+			<Button on:click={handleClick}>Enregistrer l'evenement</Button>
 		</div>
 	</div>
 	<form method="dialog" class="modal-backdrop">

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import ModalSingleEvent from './modalSingleEvent.svelte';
 	import { page } from '$app/stores';
+	import { format } from 'date-fns';
+	import { frCA } from 'date-fns/locale';
 
 	export let title: string = 'Placeholder';
 	export let date: string = 'Placeholder';
@@ -20,9 +22,9 @@
 			</a>
 		{/if}
 		<p class="capitalize font-bold text-lg">{title}</p>
-		<p>Date: {date}</p>
+		<p class="capitalize"><span class="font-bold">Date</span>: {format(date, 'eeee dd MMMM yyyy', {locale: frCA})}</p>
 		{#if time}
-			<p>Heure: {time}</p>
+			<p><span class="font-bold">Heure</span>: {time}</p>
 		{/if}
 		<ModalSingleEvent {eventID} {title} {date} {time} description={'random blah blah'} {idUser} />
 	</div>
