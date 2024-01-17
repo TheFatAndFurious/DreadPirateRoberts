@@ -25,7 +25,7 @@ async function get_events_for_single_user () {
 		}
 	const valuesOnlyFromUserEevents: readonly never[] = user_events.data?.map((item:any) => item.id_event)
 		try {
-			const getEvents = await supabase.from('events').select('*').in('id', valuesOnlyFromUserEevents)
+			const getEvents = await supabase.from('events').select('*').in('id', valuesOnlyFromUserEevents).order('date', {ascending: true})
 			return getEvents;
 		} catch (error){
 			console.error("Couldn't fetch events at step 3", error)

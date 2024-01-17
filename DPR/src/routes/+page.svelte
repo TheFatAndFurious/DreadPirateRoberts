@@ -3,12 +3,6 @@
 	import { userProfile } from '../stores/userStore';
 	import  SingleEventCard  from '../components/singleEventCard.svelte'
 
-	if(localStorage.getItem("sb-kjbbaqzbjbcivxoomkfg-auth-token") != null) {
-		const temp = localStorage.getItem("sb-kjbbaqzbjbcivxoomkfg-auth-token")
-		userProfile.update(temp);
-	} else {
-		console.log('coucou')
-	}
 	$: console.log("userProfile is: ", userProfile)
 	export let data: PageData;
 	console.log("=>(+page.svelte:5) data", data);
