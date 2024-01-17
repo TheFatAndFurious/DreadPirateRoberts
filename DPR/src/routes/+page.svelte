@@ -13,6 +13,7 @@
 {/if}
 {#if user_events.length > 0}
 {#each user_events as event}
+	<div><p>{event.date}</p></div>
 <SingleEventCard title={event.title} date={event.date} eventID={event.id} idUser={data.session?.user.id} calendarID={event.id_calendar} time={event.time} />
 {/each }
 	{:else }
