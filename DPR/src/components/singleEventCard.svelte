@@ -6,11 +6,11 @@
 
 	export let title: string = 'Placeholder';
 	export let date: string = 'Placeholder';
-	export let time: string = 'Placeholder';
-	export let eventID: string;
+	export let time: string | null = 'Placeholder';
+	export let eventID: number;
 	export let calendarName: string;
-	export let calendarID: string;
-	export let idUser: string;
+	export let calendarID: number;
+	export let idUser: string | undefined;
 	console.log($page.route.id);
 </script>
 
@@ -22,7 +22,9 @@
 			</a>
 		{/if}
 		<p class="capitalize font-bold text-lg">{title}</p>
-		<p class="capitalize"><span class="font-bold">Date</span>: {format(date, 'eeee dd MMMM yyyy', {locale: frCA})}</p>
+		<p class="capitalize">
+			<span class="font-bold">Date</span>: {format(date, 'eeee dd MMMM yyyy', { locale: frCA })}
+		</p>
 		{#if time}
 			<p><span class="font-bold">Heure</span>: {time}</p>
 		{/if}

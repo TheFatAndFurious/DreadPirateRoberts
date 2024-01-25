@@ -2,8 +2,11 @@
 	import SingleEventCard from '../../components/singleEventCard.svelte';
 	import type { PageData } from './$types';
 
+	//TODO: group events by date like the homepage
+	//TODO: create a filter to allow to pick events for a chosen day
+	//TODO: consider creating a filter to allow displaying all events whether the user registered to the calendar or not
+
 	export let data: PageData;
-	console.log('🚀 ~ data:', data);
 	const upcomingEvents = data.events;
 	const calendars = data.calendars;
 
@@ -13,8 +16,6 @@
 			calendar: calendars?.find((calendar) => calendar.id === event.id_calendar)
 		};
 	});
-
-	console.log('data', data);
 </script>
 
 <h1>Evenements a venir</h1>

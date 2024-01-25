@@ -1,9 +1,9 @@
-import { supabase } from '$lib/supabase';
 import { controlIsLoggedIn } from '$lib/user';
 import type { LayoutLoad } from './$types';
+import { userProfile } from '../stores/userStore';
 
 export const load = (async () => {
-	const { data, error } = await supabase.from('events').select('*');
 	const session = await controlIsLoggedIn();
-	return { session, testRefetch: data };
+	userProfile.set(session);
+	return { session };
 }) satisfies LayoutLoad;

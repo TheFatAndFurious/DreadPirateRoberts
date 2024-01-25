@@ -4,11 +4,15 @@
 	export let title: String;
 	export let description: String;
 	export let date: string;
-	export let time: String;
-	export let eventID: String;
-	export let idUser: String;
+	export let time: String | null;
+	export let eventID: number;
+	export let idUser: string | undefined;
+
+	//TODO: allow the user to unsuscribe the event if he is already subscribed: switch button
+	//TODO: feedback for the user after the request is processed
 
 	async function handleClick() {
+		console.log('clicked');
 		try {
 			const response = await supabase
 				.from('user_events')
@@ -18,8 +22,6 @@
 		}
 	}
 </script>
-
-
 
 <button class="btn" on:click={() => document.getElementById(`modal_${eventID}`).showModal()}
 	>Voir evenement</button
@@ -46,7 +48,7 @@
 			</div>
 		</div>
 		<div class="mx-auto flex justify-center p-2">
-			<Button on:click={handleClick}>Enregistrer l'evenement</Button>
+			<button class="btn" on:click={handleClick}>Enregistrer l'evenement</button>
 		</div>
 	</div>
 	<form method="dialog" class="modal-backdrop">
