@@ -3,8 +3,8 @@
 
 	export let data: LayoutData;
 	import '../app.css';
-	import Navbar from '../components/navbar.svelte';
-	import ModalLogin from '../components/modalLogin.svelte';
+	import Navbar from '../components/Navbar.svelte';
+	import ModalLogin from '../components/ModalLogin.svelte';
 	import { userProfile } from '../stores/userStore';
 </script>
 

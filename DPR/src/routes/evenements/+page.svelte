@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SingleEventCard from '../../components/singleEventCard.svelte';
+	import SingleEventCard from '../../components/SingleEventCard.svelte';
 	import type { PageData } from './$types';
 
 	//TODO: group events by date like the homepage

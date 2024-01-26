@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import SingleEventCard from '../components/singleEventCard.svelte';
+	import SingleEventCard from '../components/SingleEventCard.svelte';
 	import type { Database, Tables } from '../../DatabaseDefinitions';
 	import { format } from 'date-fns';
 	import { frCA } from 'date-fns/locale';
 
 	export let data: PageData;
+	let eventsByDay: Tables<'events'>[];
 
 	const user_events: Tables<'events'>[] = data.events?.data;
 	const eventsByDates = user_events.reduce((acc, event) => {
